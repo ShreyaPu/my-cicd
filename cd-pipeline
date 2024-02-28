@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Docker Deploy to container') {
+            steps {
+                script{
+                    withDockerRegistry(credentialsId: 'c33380ca-d873-42fa-9311-5f634ffaf2e6', toolName: 'docker') {
+                        sh "docker run -d --name Ekart-portal -p 8070:8070 shreyapundkar/eekart:latest"
+                    }
+                }
+               
+            }
+        }
+    }
+}
